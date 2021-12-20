@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>showBookForm</title>
+    <style>
+
+    </style>
+</head>
+<body align="center">
+
+<a th:href = "@{/report}" style="background: red;width:100px; float: right; color: white;border-radius: 5px;"> Report of Adding Book   </a>
+
+<div th:if="${message}" th:text="${message}" th:class="${'alert ' + alertClass}"/>
+
+ <form th:action="@{/searchBook}" method="get">
+    <input type="text" name="keyword" th:value="${keyword}"  placeholder="Find by Title" size="50" >
+    <button type="submit" class="btn btn-info" >Search</button>
+</form>
+
+
+<div layout:fragment="content" align="center">
+<table border="1" class="table table-bordered table-striped" style="margin: 10px" >
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>
+        <span>categoryName</span>
+        <span>categoryDescription</span>
+        </th>
+        <th>chaptersNumber</th>
+        <th>
+        <span>publisherName</span>
+        <span>publishDate</span>
+        </th>
+
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody style="margin: 10px;left: 10cm">
+    <tr  th:each="Book : ${listBooks}">
+        <td th:text="${Book.Name}"></td>
+        <td >
+                    <span style="margin-left: 20px" th:each="category : ${Book.categories}">
+
+                         <span style="padding-right: 3%;padding-left: 3%;word-wrap: break-word;
+                                margin-left: 20px" th:text="${category.categoryName} "> </span>
+
+                         <span style="padding-right: 3%;padding-left: 3%;word-wrap: break-word;
+                                width: 100px; margin: 5px"th:text="${category.description} "> </span>
+                    </span>
+
+        </td>
+
+        <td th:text="${Book.chaptersNumber}"></td>
+        <td style="word-break:break-word">
+                    <span th:each="publisher : ${Book.publisherName}">
+                         <span style="padding-bottom: 3%;padding-left: 3%;word-wrap: break-word;
+                                width: 100px;"th:text="${publisher.Name} "></span>
+
+                         <span style="padding-bottom: 3%;padding-left: 3%;word-wrap: break-word;
+                                width: 100px;"th:text="${publisher.Date} "></span>
+                      </span>
+        </td>
+        <td> <a th:href="@{/showReadBookForm/{id}(id=${Book.Id})}" class="btn btn-primary">Continue</a>
+    </tr>
+    </tbody>
+</table>
+</div>
+<th:block th:if="${Data=='NoData'}">
+
+    <script>
+
+    alert("Book was not founded");
+
+</script>
+</th:block>
+
+
+</body>
+
+</html>

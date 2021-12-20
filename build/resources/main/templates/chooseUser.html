@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>chooseUser</title>
+</head>
+<tbody>
+<body>
+<!-- /* Content of this page will be decorated by the elements of layout.html (task/layout) */ -->
+<div>
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <td>ID</td>
+            <td>FullName</td>
+            <td>Email</td>
+            <td>PhoneNumber</td>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="user : ${listUsers}">
+            <td th:text="${user.UserID}"></td>
+            <td th:text="${user.fullName}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.phonenumber}"></td>
+            <td> <a th:href="@{/showBookForm/{id}(id=${user.UserID})}" class="btn btn-primary">chooseUser</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</tbody>
+</html>

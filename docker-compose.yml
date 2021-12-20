@@ -1,0 +1,43 @@
+version: '3.6'
+
+services:
+  sql:
+    image: mysql:5.7
+    container_name: sql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_PASSWORD: root
+      MYSQL_DATABASE: imse_sql_db
+    ports:
+    - "3307:3306"
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: user
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: mongo_db
+    ports:
+      - "27017:27017"
+
+  springboot-docker-container:
+    image: springboot-docker-container
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://sql:3307/imse_sql_db?autoReconnect=true&useSSL=false
+      SPRING_DATASOURCE_USERNAME: "root"
+      SPRING_DATASOURCE_PASSWORD: "root"
+      SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.MySQL5InnoDBDialect
+      SPRING_JPA_HIBERNATE_DDL_AUTO: create-drop
+      LOGGING_LEVEL_ORG_HIBERNATE_SQL: DEBUG
+      LOGGING_LEVEL_ORG_HIBERNATE_TYPE: TRACE
+    ports:
+      - "8182:8080"
+    build:
+      context: "./"
+      dockerfile: "Dockerfile"
+    links:
+      - sql
+      - mongo
+
+

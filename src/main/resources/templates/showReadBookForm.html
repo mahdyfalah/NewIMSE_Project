@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div align="center">
+
+    <table border="1" class="table table-striped table-responsive-md">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>ChapterNumber</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="ch : ${chapter}">
+            <td th:text="${ch.title}"></td>
+            <td th:text="${ch.chapterNo}"></td>
+
+        </tr>
+        </tbody>
+    </table>
+<iframe width="560" height="600" th:src="${gtmUrl}" frameborder="1"  allowfullscreen="0"></iframe>
+
+    <form th:action="@{/sendComment}" method="get">
+        <input type="text" name="comment" th:value="${comment}"  placeholder="leave a comment" size="50" >
+        <button type="submit" class="btn btn-info" >send</button>
+    </form>
+
+</div>
+<th:block th:if="${Data=='NoData'}">
+
+    <script>
+
+        alert("something wrong is happend ");
+
+    </script>
+</th:block>
+
+<th:block th:if="${comment=='comment'}">
+
+    <script>
+
+        alert("comment was saved");
+
+    </script>
+</th:block>
+
+<th:block th:if="${comment=='notsaved'}">
+
+    <script>
+
+        alert("something wrong was happend");
+
+    </script>
+</th:block>
+</body>
+</html>
