@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Report of comment a mongoBook by users</title>
+</head>
+<body>
+<div align="center">
+
+    <table border="1" class="table table-striped table-responsive-md">
+        <thead>
+        <tr>
+            <th>Username</th>
+            <th>Bookname</th>
+            <th>category</th>
+            <th>comment</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="ch : ${report}">
+            <td th:text="${ch.userName}"></td>
+            <td th:text="${ch.bookName}"></td>
+            <td th:text="${ch.category}"></td>
+            <td th:text="${ch.comment}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

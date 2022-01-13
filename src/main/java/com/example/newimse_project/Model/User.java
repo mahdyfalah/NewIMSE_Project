@@ -21,12 +21,10 @@ public class User {
     private String adress;
 
 
-
-
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Book_User_Comment> book_user_comments = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Book_User_Read> book_user_reads = new ArrayList<>();
 
 

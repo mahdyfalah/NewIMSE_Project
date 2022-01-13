@@ -21,8 +21,6 @@ public class Book {
     private String writersName;
 
 
-
-
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Book_Publisher> bookPublishers = new ArrayList<>();
 
@@ -35,7 +33,7 @@ public class Book {
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Book_Ncategory> book_ncategories = new ArrayList<>();
 
-//    @OneToMany(mappedBy="chapterNO", cascade = CascadeType.ALL, orphanRemoval = true)
+//    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
 //    private List<Chapters> chapters = new ArrayList<>();
 
     public Book()

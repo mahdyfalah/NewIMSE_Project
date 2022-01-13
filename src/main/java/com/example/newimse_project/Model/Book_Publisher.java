@@ -1,6 +1,7 @@
 package com.example.newimse_project.Model;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -10,20 +11,20 @@ public class Book_Publisher {
     @EmbeddedId
     private BookPublisherId id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("bookId")
     @JoinColumn(name = "book_id")
     private Book book;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("publisherId")
     @JoinColumn(name = "publisher_id")
     private Publisher publisher;
 
     @Column(name = "published_date")
-    private Date publishedDate;
+    private LocalDate publishedDate;
 
-    public Book_Publisher(Book book, Publisher publisher, Date publishedDate) {
+    public Book_Publisher(Book book, Publisher publisher, LocalDate publishedDate) {
         this.id = new BookPublisherId(book.getBookID(), publisher.getUserID());
         this.book = book;
         this.publisher = publisher;
@@ -54,11 +55,11 @@ public class Book_Publisher {
         this.publisher = publisher;
     }
 
-    public Date getPublishedDate() {
+    public LocalDate getPublishedDate() {
         return publishedDate;
     }
 
-    public void setPublishedDate(Date publishedDate) {
+    public void setPublishedDate(LocalDate publishedDate) {
         this.publishedDate = publishedDate;
     }
 

@@ -1,17 +1,26 @@
 package com.example.newimse_project.filteringModel;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class filteringPublisher {
     public String Name;
+    public Long id;
+    public LocalDate date;
 
-    public Date date;
+    public Long getId() {
+        return id;
+    }
 
-    public Date getDate() {
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

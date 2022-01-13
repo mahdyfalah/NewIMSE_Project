@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Data
 @AllArgsConstructor
@@ -18,4 +19,6 @@ public class BookPublisherId implements Serializable {
 
     @Column(name = "publisher_id")
     private Long publisherId;
+
+
 }

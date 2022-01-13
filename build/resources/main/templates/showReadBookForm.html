@@ -19,20 +19,20 @@
         <tbody>
         <tr th:each="ch : ${chapter}">
             <td th:text="${ch.title}"></td>
-            <td th:text="${ch.chapterNo}"></td>
+            <td th:text="${ch.Id}"></td>
 
         </tr>
         </tbody>
     </table>
 <iframe width="560" height="600" th:src="${gtmUrl}" frameborder="1"  allowfullscreen="0"></iframe>
 
-    <form th:action="@{/sendComment}" method="get">
-        <input type="text" name="comment" th:value="${comment}"  placeholder="leave a comment" size="50" >
+    <form id='myForm' name="myForm" th:action="@{/sendComment}" onsubmit="return validateForm()" method="get" required>
+         <input  type="text" name="comment" th:value="${comment}"   placeholder="leave a comment" size="50">
         <button type="submit" class="btn btn-info" >send</button>
     </form>
 
 </div>
-<th:block th:if="${Data=='NoData'}">
+<th:block th:if="${Data =='NoData'}">
 
     <script>
 
@@ -41,22 +41,36 @@
     </script>
 </th:block>
 
-<th:block th:if="${comment=='comment'}">
+<th:block th:if="${postcomment=='comment'}">
 
     <script>
-
         alert("comment was saved");
+        //window.location.href = "FinalshowReadBookForm";
+        document.getElementById("myForm").reset();
+
 
     </script>
 </th:block>
 
-<th:block th:if="${comment=='notsaved'}">
+<th:block th:if="${postcomment=='notsaved'}">
 
     <script>
-
+        document.getElementById("myForm").reset();
         alert("something wrong was happend");
-
-    </script>
+     </script>
 </th:block>
+
 </body>
+<script>
+    function validateForm() {
+        var x = document.forms["myForm"]["comment"].value;
+        if (x == "" || x == null) {
+            alert("Comment must be filled out");
+            return false;
+        }else
+        {
+           // alert("Comment saved");
+        }
+    }
+</script>
 </html>

@@ -20,4 +20,6 @@ public class Book_User_ReadId implements Serializable {
     @Column(name = "user_id")
     private Long userId;
 
+    @Column(name = "read_id",insertable=false, updatable=false)
+    private Long read_id;
 }

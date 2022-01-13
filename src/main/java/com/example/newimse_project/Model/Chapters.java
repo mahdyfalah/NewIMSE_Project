@@ -12,12 +12,12 @@ public class Chapters implements Serializable {
 
 
     private String Title;
-    @Id
-    private int chapterNO;
 
+    @EmbeddedId
+    private CompositChapterID Id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "bookID")
+    @JoinColumn(name = "book_id", insertable=false, updatable=false)
     private Book book;
 
 
@@ -32,18 +32,20 @@ public class Chapters implements Serializable {
         Title = title;
     }
 
-    public Chapters(String title, int chapterNO, Book book) {
+    public Chapters(String title, Long Id, Book book) {
         Title = title;
-        this.chapterNO = chapterNO;
-        this.book = book;
+        this.Id = new CompositChapterID(Id,book.getBookID());
+        this.book= book;
+
     }
 
-    public int getChapterNO() {
-        return chapterNO;
+
+    public CompositChapterID getId() {
+        return Id;
     }
 
-    public void setChapterNO(int chapterNO) {
-        this.chapterNO = chapterNO;
+    public void setId(CompositChapterID id) {
+        Id = id;
     }
 
     public Book getBook() {

@@ -1,22 +1,31 @@
 package com.example.newimse_project.filteringModel;
 
+import com.example.newimse_project.Model.CompositChapterID;
+import com.mongodb.DBObject;
+
+import java.util.List;
+
 public class filteringChapters {
 
 
-    private int chapterNo;
+    private Long Id;
     private String title;
+    private String mongoID;
 
-    public filteringChapters(String title,  int chapterNo) {
-        this.chapterNo = chapterNo;
+    public filteringChapters(String title,  Long chapterNo) {
+        this.Id = chapterNo;
         this.title = title;
     }
 
-    public int getChapterNo() {
-        return chapterNo;
+
+
+
+    public Long getId() {
+        return Id;
     }
 
-    public void setChapterNo(int chapterNo) {
-        this.chapterNo = chapterNo;
+    public void setId(Long id) {
+        Id = id;
     }
 
     public String getTitle() {

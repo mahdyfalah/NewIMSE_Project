@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import java.io.Serializable;
 
 @Data
@@ -19,4 +21,7 @@ public class Book_User_CommentId implements Serializable {
 
     @Column(name = "user_id")
     private Long userId;
+
+    @Column(name = "comment_id",insertable=false, updatable=false)
+    private Long comment_id;
 }

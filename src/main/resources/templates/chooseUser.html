@@ -8,10 +8,12 @@
 <body>
 <!-- /* Content of this page will be decorated by the elements of layout.html (task/layout) */ -->
 <div>
+    <a th:href = "@{/gotomongo}" style="background: green;width:100px; float: right; color: white;border-radius: 5px; text-align: center"> mongo</a>
+
     <table class="table table-bordered table-striped">
         <thead>
         <tr>
-            <td>ID</td>
+<!--            <td>ID</td>-->
             <td>FullName</td>
             <td>Email</td>
             <td>PhoneNumber</td>
@@ -19,12 +21,12 @@
         </thead>
 
         <tbody>
-        <tr th:each="user : ${listUsers}">
-            <td th:text="${user.UserID}"></td>
-            <td th:text="${user.fullName}"></td>
-            <td th:text="${user.email}"></td>
-            <td th:text="${user.phonenumber}"></td>
-            <td> <a th:href="@{/showBookForm/{id}(id=${user.UserID})}" class="btn btn-primary">chooseUser</a>
+        <tr th:each="User : ${listUsers}">
+<!--            <td th:text="${User.UserID}"></td>-->
+            <td th:text="${User.fullName}"></td>
+            <td th:text="${User.email}"></td>
+            <td th:text="${User.phonenumber}"></td>
+            <td> <a th:href="@{/showBookForm/{id}(id=${User.UserID})}" class="btn btn-primary">chooseUser</a>
             </td>
         </tr>
         </tbody>

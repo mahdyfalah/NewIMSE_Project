@@ -3,13 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>showBookForm</title>
-    <style>
 
-    </style>
 </head>
 <body align="center">
 
-<a th:href = "@{/report}" style="background: red;width:100px; float: right; color: white;border-radius: 5px;"> Report of Adding Book   </a>
+<a th:href = "@{/reportbook_read}" style="background: red;width:100px; float: right; color: white;border-radius: 5px;"> Report of Reading Book   </a>
+<a th:href = "@{/reportbook_comment}" style="background: blue;width:100px; float: right; color: white;border-radius: 5px;"> Report of Book Comment   </a>
 
 <div th:if="${message}" th:text="${message}" th:class="${'alert ' + alertClass}"/>
 
@@ -20,20 +19,17 @@
 
 
 <div layout:fragment="content" align="center">
-<table border="1" class="table table-bordered table-striped" style="margin: 10px" >
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>
-        <span>categoryName</span>
-        <span>categoryDescription</span>
-        </th>
-        <th>chaptersNumber</th>
-        <th>
-        <span>publisherName</span>
-        <span>publishDate</span>
-        </th>
-
+<table border="1"  style="margin: 10px;padding: 10px;
+border-collapse: separate; border-spacing: 0 8px;" >
+    <thead style="margin: 10px;padding: 10px;
+     border-collapse: separate; border-spacing: 0 8px;">
+    <tr >
+        <th style="margin: 5px">Name</th>
+        <th style="margin: 5px">categoryName</th>
+        <th style="margin: 5px">categoryDescription</th>
+        <th style="margin: 5px" >chaptersNumber</th>
+        <th style="margin: 5px">publisherName</th>
+        <th style="margin: 5px">publishDate</th>
         <th>Action</th>
     </tr>
     </thead>
@@ -41,28 +37,44 @@
     <tr  th:each="Book : ${listBooks}">
         <td th:text="${Book.Name}"></td>
         <td >
-                    <span style="margin-left: 20px" th:each="category : ${Book.categories}">
+<!--                    <span style="margin-left: 20px" th:each="category : ${Book.categories}">-->
 
-                         <span style="padding-right: 3%;padding-left: 3%;word-wrap: break-word;
-                                margin-left: 20px" th:text="${category.categoryName} "> </span>
+<!--                         <span style="padding-right: 3%;padding-left: 3%;word-wrap: break-word;-->
+<!--                                margin-left: 20px" th:text="${category.categoryName} "> </span>-->
 
-                         <span style="padding-right: 3%;padding-left: 3%;word-wrap: break-word;
-                                width: 100px; margin: 5px"th:text="${category.description} "> </span>
-                    </span>
+<!--                         <span style="padding-right: 3%;padding-left: 3%;word-wrap: break-word;-->
+<!--                                width: 100px; margin: 5px"th:text="${category.description} "> </span>-->
+<!--                    </span>-->
 
+
+            <span th:each="category, iterStat : ${Book.categories}" th:text="!${iterStat.last} ? ${category.categoryName} + ', ': ${category.categoryName}"></span>
+        </td>
+        <td>
+            <span th:each="category, iterStat : ${Book.categories}" th:text="!${iterStat.last} ? ${category.description} + ', ': ${category.description}"></span>
         </td>
 
-        <td th:text="${Book.chaptersNumber}"></td>
-        <td style="word-break:break-word">
-                    <span th:each="publisher : ${Book.publisherName}">
-                         <span style="padding-bottom: 3%;padding-left: 3%;word-wrap: break-word;
-                                width: 100px;"th:text="${publisher.Name} "></span>
 
-                         <span style="padding-bottom: 3%;padding-left: 3%;word-wrap: break-word;
-                                width: 100px;"th:text="${publisher.Date} "></span>
-                      </span>
+
+        <td>
+            <span style="align-content: center;text-align: center" th:text="${Book.chaptersNumber}"></span>
         </td>
+
+<!--            <td>-->
+<!--                    <span colspan="2" th:each="publisher : ${Book.publisherName}">-->
+<!--                         <span  th:text="${publisher.Name} "></span>-->
+<!--                         <span  th:text="${publisher.Date} "></span>-->
+<!--                      </span>-->
+<!--        <td>-->
+
+        <td>
+            <span th:each="publisher, iterStat : ${Book.publisherName}" th:text="!${iterStat.last} ? ${publisher.Name} + ', ': ${publisher.Name}"></span>
+        </td>
+        <td>
+            <span th:each="publisher, iterStat : ${Book.publisherName}" th:text="!${iterStat.last} ? ${publisher.Date} + ', ': ${publisher.Date}"></span>
+        </td>
+
         <td> <a th:href="@{/showReadBookForm/{id}(id=${Book.Id})}" class="btn btn-primary">Continue</a>
+        </td>
     </tr>
     </tbody>
 </table>
